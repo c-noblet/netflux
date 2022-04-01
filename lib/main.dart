@@ -1,28 +1,52 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:netflux/screens/HomeScreen.dart';
-import 'package:netflux/theme/AdaptativeTheme.dart';
+import 'package:netflux/routes/routes.dart';
 
-void main() {
-  runApp(const MyApp());
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
-final Map<String, Widget Function(BuildContext)> routes = {
-  '/home': (context) => const HomeScreen(title: 'Netflux')
-};
-
 class MyApp extends StatelessWidget {
+  MyApp({Key? key}) : super(key: key);
 
-  final ValueNotifier<ThemeMode> _notifier = ValueNotifier(ThemeMode.light);
+  final _initialization = Firebase.initializeApp();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Netflux',
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      routes: routes,
-      initialRoute: '/home',
+    return FutureBuilder(
+      future: _initialization,
+      builder: ((context, snapshot) {
+        if (snapshot.hasError) {
+          return const MaterialApp(
+            home: Scaffold(
+              body: SafeArea(
+                child: Center(
+                  child: Text('Error'),
+                ),
+              ),
+            ),
+          );
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MaterialApp(
+            title: 'Flutter',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            debugShowCheckedModeBanner: false,
+            routes: routes,
+            initialRoute:
+                FirebaseAuth.instance.currentUser != null ? '/home' : '/login',
+          );
+        }
+
+        return Container();
+      }),
     );
   }
 }
