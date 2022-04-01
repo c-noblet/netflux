@@ -17,6 +17,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Netflux'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.wb_sunny))
+        ],
       ),
       body: Container(),
       bottomNavigationBar: BottomNavigationBar(
