@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/theme_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
@@ -19,8 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Netflux'),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.wb_sunny))
+            onPressed: () {
+              ThemeBuilder.of(context)?.changeTheme();
+            },
+            icon: Icon(Icons.dark_mode)
+          )
         ],
       ),
       body: Container(),

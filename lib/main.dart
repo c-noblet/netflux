@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:netflux/routes/routes.dart';
-
+import 'package:netflux/services/theme_builder.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,15 +33,17 @@ class MyApp extends StatelessWidget {
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(
-            title: 'Flutter',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            debugShowCheckedModeBanner: false,
-            routes: routes,
-            initialRoute:
-                FirebaseAuth.instance.currentUser != null ? '/home' : '/login',
+          return ThemeBuilder(
+            defaultBrightness: Brightness.light,
+            builder: (context, _brightness) {
+              return MaterialApp(
+                title: 'Flutter',
+                theme: ThemeData(primarySwatch: Colors.blue, brightness: _brightness),
+                debugShowCheckedModeBanner: false,
+                routes: routes,
+                initialRoute: FirebaseAuth.instance.currentUser != null ? '/home' : '/login',
+              );
+            },
           );
         }
 
