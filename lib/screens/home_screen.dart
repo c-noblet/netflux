@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../services/theme_builder.dart';
 
@@ -12,6 +13,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int index = 0;
+  String errorMessage = '';
+
+  void logout() async {
+    try {
+      await FirebaseAuth.instance.signOut()
+      .then((value) => Navigator.of(context).pushReplacementNamed('/login'));
+    } catch (e) {
+      errorMessage = e.toString();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               ThemeBuilder.of(context)?.changeTheme();
             },
-            icon: Icon(Icons.dark_mode)
+            icon: const Icon(Icons.dark_mode)
+          ),
+          IconButton(
+            onPressed: () {
+              logout();
+            },
+            icon: const Icon(Icons.logout)
           )
         ],
       ),
