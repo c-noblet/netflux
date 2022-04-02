@@ -72,7 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              itemBuilder: (_, index) => Text(snapshot.data![index].name),
+              itemBuilder: (_, index) => GestureDetector(
+                onTap: () {
+                  // TODO : redirect to show details page
+                },
+                child: Column(
+                  children: [
+                    (snapshot.data![index].image != null) ? Image.network(snapshot.data![index].image!.medium) : Container(),
+                    Text(snapshot.data![index].name)
+                  ],
+                )
+              )
             );
           } else {
             return const Center(child: CircularProgressIndicator());
