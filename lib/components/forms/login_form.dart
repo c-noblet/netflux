@@ -17,7 +17,7 @@ class _LoginFormState extends State<LoginForm> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)
           .then(
-            (value) => Navigator.of(context).pushReplacementNamed('/home'),
+            (value) => Navigator.of(context).pushReplacementNamed('/'),
           );
 
     } on FirebaseException catch (error) {

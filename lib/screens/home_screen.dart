@@ -3,13 +3,10 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:netflux/models/show_model.dart';
-import '../services/theme_builder.dart';
 import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -49,56 +46,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Netflux'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              ThemeBuilder.of(context)?.changeTheme();
-            },
-            icon: const Icon(Icons.dark_mode)
-          ),
-          IconButton(
-            onPressed: () {
-              logout();
-            },
-            icon: const Icon(Icons.logout)
-          )
-        ],
-      ),
-      body: FutureBuilder<List<Show>>(
-        future: shows,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemBuilder: (_, index) => GestureDetector(
-                onTap: () {
-                  // TODO : redirect to show details page
-                },
-                child: Column(
-                  children: [
-                    (snapshot.data![index].image != null) ? Image.network(snapshot.data![index].image!.medium) : Container(),
-                    Text(snapshot.data![index].name)
-                  ],
-                )
+    return FutureBuilder<List<Show>>(
+      future: shows,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemBuilder: (_, index) => GestureDetector(
+              onTap: () {
+                // TODO : redirect to show details page
+              },
+              child: Column(
+                children: [
+                  (snapshot.data![index].image != null) ? Image.network(snapshot.data![index].image!.medium) : Container(),
+                  Text(snapshot.data![index].name)
+                ],
               )
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
+            )
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
         }
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        iconSize: 48,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'User')
-        ],
-      ),
+      }
     );
   }
 }

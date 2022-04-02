@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(primarySwatch: Colors.blue, brightness: _brightness),
                 debugShowCheckedModeBanner: false,
                 routes: routes,
-                initialRoute: FirebaseAuth.instance.currentUser != null ? '/home' : '/login',
+                initialRoute: FirebaseAuth.instance.currentUser != null ? '/' : '/login',
               );
             },
           );
