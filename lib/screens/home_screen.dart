@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:netflux/components/cards/card.dart';
 import 'package:netflux/models/show_model.dart';
 import '../services/theme_builder.dart';
 import 'package:http/http.dart' as http;
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              itemBuilder: (_, index) => Text(snapshot.data![index].name),
+              itemBuilder: (_, index) => ShowCard(data: snapshot.data![index])
             );
           } else {
             return const Center(child: CircularProgressIndicator());
