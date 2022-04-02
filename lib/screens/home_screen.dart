@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:netflux/models/show_model.dart';
 import '../services/theme_builder.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
@@ -14,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int index = 0;
   String errorMessage = '';
+  late Future<List<Show>> shows;
 
   void logout() async {
     try {
@@ -22,6 +27,24 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       errorMessage = e.toString();
     }
+  }
+
+  Future<List<Show>> fetchShow() async {
+    final response =
+        await http.get(Uri.parse('https://api.tvmaze.com/shows'));
+
+    if (response.statusCode == 200) {
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+      return parsed.map<Show>((json) => Show.fromMap(json)).toList();
+    } else {
+      throw Exception('Failed to load show');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    shows = fetchShow();
   }
 
   @override
@@ -44,7 +67,18 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: Container(),
+      body: FutureBuilder<List<Show>>(
+        future: shows,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemBuilder: (_, index) => Text(snapshot.data![index].name),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        }
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         showSelectedLabels: false,
