@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return ListView.builder(
             itemBuilder: (_, index) => GestureDetector(
               onTap: () {
-                // TODO : redirect to show details page
+                Navigator.of(context).pushNamed('/detail');
               },
               child: Column(
                 children: [
