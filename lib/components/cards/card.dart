@@ -17,11 +17,16 @@ class _ShowCardState extends State<ShowCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Text(this.data.name),
-      )
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed('/details');
+      },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(this.data.name),
+        ),
+      ),
     );
   }
 }
