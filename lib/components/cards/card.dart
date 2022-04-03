@@ -19,12 +19,17 @@ class _ShowCardState extends State<ShowCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/details');
+        Navigator.of(context).pushNamed('/detail');
       },
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Text(this.data.name),
+          child: Column(
+            children: [
+              (this.data.image != null) ? Image.network(this.data.image!.medium) : Container(),
+              Text(this.data.name)
+            ],
+          ),
         ),
       ),
     );

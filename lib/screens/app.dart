@@ -65,7 +65,7 @@ class _AppScreenState extends State<AppScreen> {
         },
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        iconSize: 48,
+        iconSize: 32,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
