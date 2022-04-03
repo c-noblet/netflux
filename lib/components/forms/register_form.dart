@@ -17,7 +17,7 @@ class _RegisterFormState extends State<RegisterForm> {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
           .then(
-            (value) => Navigator.of(context).pushReplacementNamed('/home'),
+            (value) => Navigator.of(context).pushReplacementNamed('/'),
           );
 
     } on FirebaseException catch (error) {
