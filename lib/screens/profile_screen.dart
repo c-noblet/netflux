@@ -28,7 +28,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         if (snapshot.hasData) {
           UserModel user = UserModel.fromSnapshot(snapshot.data);
           
-          return ProfileCard(user: user);
+          return Column(
+            children: [
+              ProfileCard(user: user),
+              TextButton(
+              child: const Text('Update profile'),
+              onPressed: () { 
+                Navigator.of(context).pushNamed('/profile');
+              },
+            )
+            ]
+          );
         } else if (snapshot.hasError) {
           return const Text('Internal error');
         }
