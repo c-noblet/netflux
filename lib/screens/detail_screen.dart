@@ -12,7 +12,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late Future<Show> show;
+  late Future<Show> futureShow;
 
   Future<Show> fetchShow(id) async {
     final response = await http.get(Uri.parse('https://api.tvmaze.com/shows/' + id.toString()));
@@ -21,25 +21,64 @@ class _DetailScreenState extends State<DetailScreen> {
       final parsed = json.decode(response.body).cast<String, dynamic>();
       return Show.fromMap(parsed);
     } else {
-      throw Exception('Failed to load show');
+      throw Exception('Failed to load futureShow');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)!.settings.arguments as int;
-    show = fetchShow(id);
+    futureShow = fetchShow(id);
 
     return FutureBuilder<Show>(
-      future: show,
+      future: futureShow,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          var show = snapshot.data!;
+          List<Widget> genres = [];
+          for (var genre in show.genres) {
+            genres.add(
+              Padding(
+                padding: EdgeInsets.all(0.0),
+                child: Text(genre),
+              )
+            );
+          }
+
           return Scaffold(
             appBar: AppBar(
-              title: Text(snapshot.data!.name),
+              title: Text(show.name),
             ),
             body: SafeArea(
-              child: Html(data: snapshot.data!.summary.toString()),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        child: Image.network(show.image!.medium),
+                      ),
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(show.name),
+                            Text(show.language),
+                            Text(show.status),
+                            Text(show.averageRuntime.toString() + 'min')
+                          ],
+                        )
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Row(children: genres),
+                      Html(data: show.summary.toString())
+                    ],
+                  )
+                ],
+              )
             ),
           );
         } else {

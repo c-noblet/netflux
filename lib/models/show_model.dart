@@ -19,11 +19,11 @@ class Show {
     this.url,
     required this.name,
     this.type,
-    this.language,
+    required this.language,
     required this.genres,
-    this.status,
+    required this.status,
     this.runtime,
-    this.averageRuntime,
+    required this.averageRuntime,
     this.premiered,
     this.ended,
     this.officialSite,
@@ -42,11 +42,11 @@ class Show {
   String? url;
   String name;
   String? type;
-  String? language;
+  String language;
   List<String> genres;
-  String? status;
+  String status;
   int? runtime;
-  int? averageRuntime;
+  int averageRuntime;
   DateTime? premiered;
   DateTime? ended;
   String? officialSite;
