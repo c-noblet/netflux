@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:netflux/models/show_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -62,14 +63,18 @@ class _DetailScreenState extends State<DetailScreen> {
                         flex: 1,
                         child: Column(
                           children: [
-                            Text(
-                              show.name,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold
-                              )
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                show.name,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                                )
+                              ),
                             ),
                             Text(show.language),
+                            Text(DateFormat("dd-MM-yyyy").format(show.premiered)),
                             Text(show.status),
                             Text(show.averageRuntime.toString() + 'min')
                           ],
@@ -79,7 +84,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                   Column(
                     children: [
-                      Row(children: genres),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(children: genres),
+                      ),
                       Html(data: show.summary.toString())
                     ],
                   )

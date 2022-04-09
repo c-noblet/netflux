@@ -24,7 +24,7 @@ class Show {
     required this.status,
     this.runtime,
     required this.averageRuntime,
-    this.premiered,
+    required this.premiered,
     this.ended,
     this.officialSite,
     this.rating,
@@ -47,7 +47,7 @@ class Show {
   String status;
   int? runtime;
   int averageRuntime;
-  DateTime? premiered;
+  DateTime premiered;
   DateTime? ended;
   String? officialSite;
   Rating? rating;
@@ -70,7 +70,7 @@ class Show {
     status: json["status"],
     runtime: json["runtime"],
     averageRuntime: json["averageRuntime"],
-    premiered: json["premiered"] != null ? DateTime.parse(json["premiered"]) : null,
+    premiered: DateTime.parse(json["premiered"]),
     ended: json["ended"] != null ? DateTime.parse(json["ended"]) : null,
     officialSite: json["officialSite"],
     rating: json["rating"] != null ? Rating.fromMap(json["rating"]) : null,
