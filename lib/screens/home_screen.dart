@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (_, i) {
                 return Transform.scale(
                   scale: i == index ? 1 : 0.9,
-                  child: ShowCard(data: snapshot.data![index])
+                  child: ShowCard(data: snapshot.data![i])
                 );
               }
             ),

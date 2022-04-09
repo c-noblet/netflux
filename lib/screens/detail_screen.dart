@@ -39,7 +39,7 @@ class _DetailScreenState extends State<DetailScreen> {
           for (var genre in show.genres) {
             genres.add(
               Padding(
-                padding: EdgeInsets.all(0.0),
+                padding: EdgeInsets.all(1.0),
                 child: Text(genre),
               )
             );
@@ -54,20 +54,26 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   Row(
                     children: [
-                      Container(
+                      Expanded(
+                        flex: 1,
                         child: Image.network(show.image!.medium),
                       ),
-                      Container(
+                      Expanded(
+                        flex: 1,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(show.name),
+                            Text(
+                              show.name,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold
+                              )
+                            ),
                             Text(show.language),
                             Text(show.status),
                             Text(show.averageRuntime.toString() + 'min')
                           ],
-                        )
+                        ),
                       )
                     ],
                   ),
