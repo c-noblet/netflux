@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return SizedBox(
-            height: 400,
+            height: 415,
             child: PageView.builder(
               itemCount: 10,
               onPageChanged: (int i) => setState(() => index = i),

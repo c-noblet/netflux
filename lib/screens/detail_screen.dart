@@ -40,7 +40,7 @@ class _DetailScreenState extends State<DetailScreen> {
           for (var genre in show.genres) {
             genres.add(
               Padding(
-                padding: EdgeInsets.all(1.0),
+                padding: EdgeInsets.all(5.0),
                 child: Text(genre),
               )
             );
@@ -74,7 +74,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                             ),
                             Text(show.language),
-                            Text(DateFormat("dd-MM-yyyy").format(show.premiered)),
+                            Text(DateFormat("dd/MM/yyyy").format(show.premiered)),
                             Text(show.status),
                             Text(show.averageRuntime.toString() + 'min')
                           ],
@@ -85,8 +85,11 @@ class _DetailScreenState extends State<DetailScreen> {
                   Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Row(children: genres),
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: genres
+                        ),
                       ),
                       Html(data: show.summary.toString())
                     ],

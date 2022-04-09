@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:netflux/models/show_model.dart';
+import 'package:intl/intl.dart';
 
 class ShowCard extends StatefulWidget {
   const ShowCard({Key? key, required this.data}) : super(key: key);
@@ -18,6 +19,17 @@ class _ShowCardState extends State<ShowCard> {
 
   @override
   Widget build(BuildContext context) {
+    var show = this.data;
+    List<Widget> genres = [];
+    for (var genre in show.genres) {
+      genres.add(
+        Padding(
+          padding: EdgeInsets.all(3.0),
+          child: Text(genre),
+        )
+      );
+    }
+
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed('/detail', arguments: this.data.id);
@@ -25,12 +37,28 @@ class _ShowCardState extends State<ShowCard> {
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
+          child: Center(
+            child: Column(
             children: [
-              (this.data.image != null) ? Image.network(this.data.image!.medium) : Container(),
-              Text(this.data.name)
+              (show.image != null) ? Image.network(show.image!.medium) : Container(),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5.0),
+                child: Text(
+                  show.name,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                  )
+                ),
+              ),
+              Text(DateFormat("dd/MM/yyyy").format(show.premiered)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: genres
+              )
             ],
           ),
+          )
         ),
       ),
     );
