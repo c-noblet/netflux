@@ -49,146 +49,342 @@ class _UserFormState extends State<UserForm> {
   Widget build(BuildContext context) {
     return Form(
       key: key,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 20,
-          horizontal: 20,
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue.shade300, Colors.blue.shade800]
+          )
         ),
-        child: Column(
-          children: <Widget>[
-            const Text('Register page'),
-            const SizedBox(
-              height: 25,
-            ),
-            TextFormField(
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-              onSaved: (String? value) {
-                setState(() {
-                  widget.user.firstname = value!;
-                });
-              },
-              initialValue: widget.user.firstname,
-              decoration: const InputDecoration(hintText: 'Firstname'),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            TextFormField(
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-              onSaved: (String? value) {
-                setState(() {
-                  widget.user.lastname = value!;
-                });
-              },
-              initialValue: widget.user.lastname,
-              decoration: const InputDecoration(hintText: 'Lastname'),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            TextFormField(
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-              onSaved: (String? value) {
-                setState(() {
-                  widget.user.city = value!;
-                });
-              },
-              initialValue: widget.user.city,
-              decoration: const InputDecoration(hintText: 'City'),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            TextFormField(
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-              onSaved: (String? value) {
-                setState(() {
-                  widget.user.country = value!;
-                });
-              },
-              initialValue: widget.user.country,
-              decoration: const InputDecoration(hintText: 'Country'),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            DateTimeField(
-              format: DateFormat("yyyy-MM-dd"),
-              onShowPicker: (context, currentValue) {
-                return showDatePicker(
-                    context: context,
-                    firstDate: DateTime(1900),
-                    initialDate: DateTime(2000),
-                    lastDate: DateTime.now()
-                );
-              },
-              validator: (DateTime? value) {
-                if (value == null) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-              onSaved: (DateTime? value) {
-                setState(() {
-                  widget.user.birthdate = DateFormat('dd/MM/yyyy').format(value!);
-                });
-              },
-              initialValue: convertBirthdate(widget.user.birthdate),
-              decoration: const InputDecoration(hintText: 'Birthdate'),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            TextFormField(
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-              onSaved: (String? value) {
-                setState(() {
-                  widget.user.image = value!;
-                });
-              },
-              initialValue: widget.user.image,
-              decoration: const InputDecoration(hintText: 'Image'),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (key.currentState!.validate()) {
-                  key.currentState!.save();
-                  updateUserDatas(widget.user);
-                }
-              },
-              child: const Text('Submit'),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              
+              Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Edit',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black45,
+                            offset: Offset(1, 1),
+                            blurRadius: 5
+                          )
+                        ]
+                      ),
+                    ),
+                    Text(
+                      ' Profile',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue.shade300,
+                        shadows: const [
+                          Shadow(
+                            color: Colors.black45,
+                            offset: Offset(1, 1),
+                            blurRadius: 5
+                          )
+                        ]
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              const SizedBox(
+                height: 50,
+              ),
+              
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(bottom: 10),
+                child: TextFormField(
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      widget.user.firstname = value!;
+                    });
+                  },
+                  initialValue: widget.user.firstname,
+                  style: const TextStyle(color: Colors.white, fontSize: 14.5),
+                  decoration: InputDecoration(
+                      prefixIconConstraints:  const BoxConstraints(minWidth: 45),
+                      prefixIcon: const Icon(
+                        Icons.account_circle,
+                        color: Colors.white70,
+                        size: 22,
+                      ),
+                      border: InputBorder.none,
+                      hintText: 'Firstname',
+                      hintStyle: const TextStyle(color: Colors.white60, fontSize: 14.5),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white38)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white70))
+                      ),
+                ),
+              ),
+              // Lastname
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(bottom: 10),
+                child: TextFormField(
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      widget.user.lastname = value!;
+                    });
+                  },
+                  initialValue: widget.user.lastname,
+                  style: const TextStyle(color: Colors.white, fontSize: 14.5),
+                  decoration: InputDecoration(
+                      prefixIconConstraints:  const BoxConstraints(minWidth: 45),
+                      prefixIcon: const Icon(
+                        Icons.account_circle,
+                        color: Colors.white70,
+                        size: 22,
+                      ),
+                      border: InputBorder.none,
+                      hintText: 'Lastname',
+                      hintStyle: const TextStyle(color: Colors.white60, fontSize: 14.5),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white38)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white70))
+                      ),
+                ),
+              ),
+              // Country
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(bottom: 10),
+                child: TextFormField(
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      widget.user.country = value!;
+                    });
+                  },
+                  initialValue: widget.user.country,
+                  style: const TextStyle(color: Colors.white, fontSize: 14.5),
+                  decoration: InputDecoration(
+                      prefixIconConstraints:  const BoxConstraints(minWidth: 45),
+                      prefixIcon: const Icon(
+                        Icons.pin_drop,
+                        color: Colors.white70,
+                        size: 22,
+                      ),
+                      border: InputBorder.none,
+                      hintText: 'Country',
+                      hintStyle: const TextStyle(color: Colors.white60, fontSize: 14.5),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white38)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white70))
+                      ),
+                ),
+              ),
+              // City
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(bottom: 10),
+                child: TextFormField(
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      widget.user.city = value!;
+                    });
+                  },
+                  initialValue: widget.user.city,
+                  style: const TextStyle(color: Colors.white, fontSize: 14.5),
+                  decoration: InputDecoration(
+                      prefixIconConstraints:  const BoxConstraints(minWidth: 45),
+                      prefixIcon: const Icon(
+                        Icons.domain,
+                        color: Colors.white70,
+                        size: 22,
+                      ),
+                      border: InputBorder.none,
+                      hintText: 'City',
+                      hintStyle: const TextStyle(color: Colors.white60, fontSize: 14.5),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white38)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white70))
+                      ),
+                ),
+              ),
+              // Birthdate
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(bottom: 10),
+                child: DateTimeField(
+                  format: DateFormat("yyyy-MM-dd"),
+                  onShowPicker: (context, currentValue) {
+                    return showDatePicker(
+                        context: context,
+                        firstDate: DateTime(1900),
+                        initialDate: DateTime(2000),
+                        lastDate: DateTime.now()
+                    );
+                  },
+                  validator: (DateTime? value) {
+                    if (value == null) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  onSaved: (DateTime? value) {
+                    setState(() {
+                      widget.user.birthdate = DateFormat('dd/MM/yyyy').format(value!);
+                    });
+                  },
+                  initialValue: convertBirthdate(widget.user.birthdate),
+                  style: const TextStyle(color: Colors.white, fontSize: 14.5),
+                  decoration: InputDecoration(
+                      prefixIconConstraints:  const BoxConstraints(minWidth: 45),
+                      prefixIcon: const Icon(
+                        Icons.event,
+                        color: Colors.white70,
+                        size: 22,
+                      ),
+                      border: InputBorder.none,
+                      hintText: 'Birthdate',
+                      hintStyle: const TextStyle(color: Colors.white60, fontSize: 14.5),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white38)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white70))
+                      ),
+                ),
+              ),
+              // City
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(bottom: 10),
+                child: TextFormField(
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      widget.user.image = value!;
+                    });
+                  },
+                  initialValue: widget.user.image,
+                  style: const TextStyle(color: Colors.white, fontSize: 14.5),
+                  decoration: InputDecoration(
+                      prefixIconConstraints:  const BoxConstraints(minWidth: 45),
+                      prefixIcon: const Icon(
+                        Icons.image,
+                        color: Colors.white70,
+                        size: 22,
+                      ),
+                      border: InputBorder.none,
+                      hintText: 'Image',
+                      hintStyle: const TextStyle(color: Colors.white60, fontSize: 14.5),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white38)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: const BorderSide(color: Colors.white70))
+                      ),
+                ),
+              ),
+
+              const SizedBox(
+                height: 40,
+              ),
+
+              GestureDetector(
+                onTap: () {
+                  if (key.currentState!.validate()) {
+                    key.currentState!.save();
+                    updateUserDatas(widget.user);
+                  }
+                },
+                child: Container(
+                  height: 53,
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 4,
+                        color: Colors.black12.withOpacity(.2),
+                        offset: const Offset(2, 2)
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(100),
+                    gradient: LinearGradient(colors: [
+                      Colors.blue.shade200,
+                      Colors.blue.shade900
+                    ])
+                  ),
+                  child: Text('Edit',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(.8),
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold
+                    )
+                  ),
+                ),
+              ),
+              
+              
+              const SizedBox(
+                height: 20,
+              )
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }
