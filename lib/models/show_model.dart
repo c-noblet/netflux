@@ -19,12 +19,12 @@ class Show {
     this.url,
     required this.name,
     this.type,
-    this.language,
+    required this.language,
     required this.genres,
-    this.status,
+    required this.status,
     this.runtime,
-    this.averageRuntime,
-    this.premiered,
+    required this.averageRuntime,
+    required this.premiered,
     this.ended,
     this.officialSite,
     this.rating,
@@ -42,12 +42,12 @@ class Show {
   String? url;
   String name;
   String? type;
-  String? language;
+  String language;
   List<String> genres;
-  String? status;
+  String status;
   int? runtime;
-  int? averageRuntime;
-  DateTime? premiered;
+  int averageRuntime;
+  DateTime premiered;
   DateTime? ended;
   String? officialSite;
   Rating? rating;
@@ -70,7 +70,7 @@ class Show {
     status: json["status"],
     runtime: json["runtime"],
     averageRuntime: json["averageRuntime"],
-    premiered: json["premiered"] != null ? DateTime.parse(json["premiered"]) : null,
+    premiered: DateTime.parse(json["premiered"]),
     ended: json["ended"] != null ? DateTime.parse(json["ended"]) : null,
     officialSite: json["officialSite"],
     rating: json["rating"] != null ? Rating.fromMap(json["rating"]) : null,

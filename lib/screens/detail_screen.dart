@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:netflux/models/show_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late Future<Show> show;
+  late Future<Show> futureShow;
 
   Future<Show> fetchShow(id) async {
     final response = await http.get(Uri.parse('https://api.tvmaze.com/shows/' + id.toString()));
@@ -21,25 +22,80 @@ class _DetailScreenState extends State<DetailScreen> {
       final parsed = json.decode(response.body).cast<String, dynamic>();
       return Show.fromMap(parsed);
     } else {
-      throw Exception('Failed to load show');
+      throw Exception('Failed to load futureShow');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)!.settings.arguments as int;
-    show = fetchShow(id);
+    futureShow = fetchShow(id);
 
     return FutureBuilder<Show>(
-      future: show,
+      future: futureShow,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          var show = snapshot.data!;
+          List<Widget> genres = [];
+          for (var genre in show.genres) {
+            genres.add(
+              Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Text(genre),
+              )
+            );
+          }
+
           return Scaffold(
             appBar: AppBar(
-              title: Text(snapshot.data!.name),
+              title: Text(show.name),
             ),
             body: SafeArea(
-              child: Html(data: snapshot.data!.summary.toString()),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Image.network(show.image!.medium),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                show.name,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                                )
+                              ),
+                            ),
+                            Text(show.language),
+                            Text(DateFormat("dd/MM/yyyy").format(show.premiered)),
+                            Text(show.status),
+                            Text(show.averageRuntime.toString() + 'min')
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: genres
+                        ),
+                      ),
+                      Html(data: show.summary.toString())
+                    ],
+                  )
+                ],
+              )
             ),
           );
         } else {

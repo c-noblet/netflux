@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:netflux/routes/routes.dart';
@@ -41,7 +40,7 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(primarySwatch: Colors.blue, brightness: _brightness),
                 debugShowCheckedModeBanner: false,
                 routes: routes,
-                initialRoute: FirebaseAuth.instance.currentUser != null ? '/' : '/login',
+                initialRoute: '/splash',
               );
             },
           );
