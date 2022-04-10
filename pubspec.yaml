@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^3.1.11
   datetime_picker_formfield: ^2.0.0
   flutter_html: ^2.2.1
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

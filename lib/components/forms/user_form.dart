@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:netflux/models/user_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UserForm extends StatefulWidget {
   const UserForm({Key? key, required this.user}) : super(key: key);
@@ -30,6 +31,11 @@ class _UserFormState extends State<UserForm> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update(widget.user.toMap())
       ;
+
+      Fluttertoast.showToast(
+        msg: 'Profile updated !',
+        gravity: ToastGravity.TOP
+      );
 
       Navigator.pop(context);
     } catch (error) {

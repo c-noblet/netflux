@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:netflux/models/user_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -16,8 +17,7 @@ class _RegisterFormState extends State<RegisterForm> {
   final key = GlobalKey<FormState>();
   String 
     email = '', 
-    password = '', 
-    errorMessage = '';
+    password = '';
 
   UserModel user = UserModel(firstname: '', lastname: '', country: '', city: '', birthdate: '', image: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.mycustomer.com%2Fsites%2Fall%2Fthemes%2Fpp%2Fimg%2Fdefault-user.png&f=1&nofb=1');
 
@@ -27,23 +27,18 @@ class _RegisterFormState extends State<RegisterForm> {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) async {
             storeUserDataToFirestore(value.user!.uid);
+            showToastMessage('Registered with success !');
             Navigator.of(context).pushReplacementNamed('/');
           });
 
     } on FirebaseException catch (error) {
       if (error.code == 'weak-password') {
-        setState(() {
-          errorMessage = 'weak-password';
-        });
+        showToastMessage('weak-password');
       } else if (error.code == 'email-already-in-use') {
-        setState(() {
-          errorMessage = 'email-already-in-use';
-        });
+        showToastMessage('email-already-in-use');
       }
     } catch (error) {
-      setState(() {
-        errorMessage = error.toString();
-      });
+      showToastMessage(error.toString());
     }
   }
 
@@ -57,9 +52,16 @@ class _RegisterFormState extends State<RegisterForm> {
       ;
     } catch (error) {
       setState(() {
-        errorMessage = error.toString();
+        showToastMessage(error.toString());
       });
     }
+  }
+
+  void showToastMessage(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      gravity: ToastGravity.TOP
+    );
   }
 
   @override

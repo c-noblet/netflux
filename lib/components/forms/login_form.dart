@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -17,22 +18,32 @@ class _LoginFormState extends State<LoginForm> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)
           .then(
-            (value) => Navigator.of(context).pushReplacementNamed('/'),
+            (value) => {
+              showToastMessage('Logged with success !'),
+              Navigator.of(context).pushReplacementNamed('/')
+            },
           );
 
     } on FirebaseException catch (error) {
       if (error.code == 'invalid-email') {
-        setState(() { errorMessage = 'Invalid email'; });
+        showToastMessage('Invalid email');
       } else if (error.code == 'user-disabled') {
-        setState(() { errorMessage = 'User disabled'; });
+        showToastMessage('User disabled');
       } else if (error.code == 'user-not-found') {
-        setState(() { errorMessage = 'User not found'; });
+        showToastMessage('User not found');
       } else if (error.code == 'wrong-password') {
-        setState(() { errorMessage = 'Wrong password'; });
+        showToastMessage('Wrong password');
       }
     } catch (error) {
-      setState(() { errorMessage = error.toString(); });
+      showToastMessage(error.toString());
     }
+  }
+
+  void showToastMessage(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      gravity: ToastGravity.TOP
+    );
   }
 
   @override
