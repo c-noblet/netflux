@@ -28,16 +28,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
         if (snapshot.hasData) {
           UserModel user = UserModel.fromSnapshot(snapshot.data);
           
-          return Column(
-            children: [
-              ProfileCard(user: user),
-              TextButton(
-              child: const Text('Update profile'),
-              onPressed: () { 
-                Navigator.of(context).pushNamed('/profile');
-              },
-            )
-            ]
+          return Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.blue.shade300, Colors.blue.shade800]
+              )
+            ),
+            child: Column(
+              children: [
+                  ProfileCard(user: user),
+                  const SizedBox(
+                    height: 100.0,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/profile');
+                    },
+                    child: Container(
+                      height: 53,
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white60),
+                        borderRadius: BorderRadius.circular(100),                
+                      ),                
+                      child: Text('Edit profile',                
+                        style: TextStyle(                
+                          color: Colors.white.withOpacity(.8),                
+                          fontSize: 15,                
+                          fontWeight: FontWeight.bold
+                        )
+                      ),                
+                    ),
+                  ),
+                  ],
+            ),
           );
         } else if (snapshot.hasError) {
           return const Text('Internal error');
