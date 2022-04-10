@@ -212,7 +212,6 @@ class _RegisterFormState extends State<RegisterForm> {
                     });
                   },
                   style: const TextStyle(color: Colors.white, fontSize: 14.5),
-                  obscureText: true,
                   decoration: InputDecoration(
                       prefixIconConstraints:  const BoxConstraints(minWidth: 45),
                       prefixIcon: const Icon(
@@ -249,7 +248,6 @@ class _RegisterFormState extends State<RegisterForm> {
                     });
                   },
                   style: const TextStyle(color: Colors.white, fontSize: 14.5),
-                  obscureText: true,
                   decoration: InputDecoration(
                       prefixIconConstraints:  const BoxConstraints(minWidth: 45),
                       prefixIcon: const Icon(
@@ -286,7 +284,6 @@ class _RegisterFormState extends State<RegisterForm> {
                     });
                   },
                   style: const TextStyle(color: Colors.white, fontSize: 14.5),
-                  obscureText: true,
                   decoration: InputDecoration(
                       prefixIconConstraints:  const BoxConstraints(minWidth: 45),
                       prefixIcon: const Icon(
@@ -323,7 +320,6 @@ class _RegisterFormState extends State<RegisterForm> {
                     });
                   },
                   style: const TextStyle(color: Colors.white, fontSize: 14.5),
-                  obscureText: true,
                   decoration: InputDecoration(
                       prefixIconConstraints:  const BoxConstraints(minWidth: 45),
                       prefixIcon: const Icon(
@@ -369,7 +365,6 @@ class _RegisterFormState extends State<RegisterForm> {
                     });
                   },
                   style: const TextStyle(color: Colors.white, fontSize: 14.5),
-                  obscureText: true,
                   decoration: InputDecoration(
                       prefixIconConstraints:  const BoxConstraints(minWidth: 45),
                       prefixIcon: const Icon(
