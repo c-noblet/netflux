@@ -94,7 +94,7 @@ class Show {
     "status": status,
     "runtime": runtime,
     "averageRuntime": averageRuntime,
-    "premiered": "${premiered?.year.toString().padLeft(4, '0')}-${premiered?.month.toString().padLeft(2, '0')}-${premiered?.day.toString().padLeft(2, '0')}",
+    "premiered": "${premiered.year.toString().padLeft(4, '0')}-${premiered.month.toString().padLeft(2, '0')}-${premiered.day.toString().padLeft(2, '0')}",
     "ended": "${ended?.year.toString().padLeft(4, '0')}-${ended?.month.toString().padLeft(2, '0')}-${ended?.day.toString().padLeft(2, '0')}",
     "officialSite": officialSite,
     "rating": rating?.toMap(),

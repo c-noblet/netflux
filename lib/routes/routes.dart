@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:netflux/screens/app.dart';
 import 'package:netflux/screens/detail_screen.dart';
@@ -16,5 +14,5 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/login': (context) => const LoginScreen(),
   '/detail': (context) => const DetailScreen(),
   '/profile': (context) => const UserUpdateScreen(),
-  '/screen': (context) => const SearchScreen()
+  '/search': (context) => const SearchScreen()
 };

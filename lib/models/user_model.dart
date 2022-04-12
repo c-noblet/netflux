@@ -28,11 +28,11 @@ class UserModel {
 
   factory UserModel.fromSnapshot(DocumentSnapshot<Object?>? object) => UserModel(
     firstname: object!["firstname"],
-    lastname: object!["lastname"],
-    country: object!["country"],
-    city: object!["city"],
-    birthdate: object!["birthdate"],
-    image: object!["image"],
+    lastname: object["lastname"],
+    country: object["country"],
+    city: object["city"],
+    birthdate: object["birthdate"],
+    image: object["image"],
   );
 
   Map<String, dynamic> toMap() => {
