@@ -43,6 +43,12 @@ class _AppScreenState extends State<AppScreen> {
         title: const Text('Netflux'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed('/search');
+            },
+          ),
+          IconButton(
             onPressed: () {
               ThemeBuilder.of(context)?.changeTheme();
             },
