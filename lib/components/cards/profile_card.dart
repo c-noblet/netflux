@@ -28,11 +28,20 @@ class _ProfileCardState extends State<ProfileCard> {
             const SizedBox(
               height: 20.0,
             ),
-            CircleAvatar(
-              backgroundImage: NetworkImage(
-                widget.user.image,
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 5,
+                    color: Colors.white
+                ),
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: NetworkImage(widget.user.image),
+                  fit: BoxFit.cover
+                ),
               ),
-              radius: 50.0,
+              height: 100,
+              width: 100,
             ),
             const SizedBox(
               height: 20.0,
@@ -60,7 +69,7 @@ class _ProfileCardState extends State<ProfileCard> {
             Card(
               margin: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 5.0),
               clipBehavior: Clip.antiAlias,
-              color: Colors.white,
+              color: Theme.of(context).brightness == Brightness.light ? Colors.white : Colors.grey.shade700,
               elevation: 5.0,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 22.0),
@@ -71,7 +80,7 @@ class _ProfileCardState extends State<ProfileCard> {
                         children: [
                           Icon(
                             Icons.event,
-                            color: Colors.blue.shade500,
+                            color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade500 : Colors.white,
                             size: 22,
                           ),
                           const SizedBox(
@@ -81,7 +90,7 @@ class _ProfileCardState extends State<ProfileCard> {
                             widget.user.birthdate,
                             style: TextStyle(
                               fontSize: 15.0,
-                              color: Colors.blue.shade800,
+                              color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade800 : Colors.white,
                             ),
                           )
                         ],
@@ -92,7 +101,7 @@ class _ProfileCardState extends State<ProfileCard> {
                         children: [
                           Icon(
                             Icons.pin_drop,
-                            color: Colors.blue.shade500,
+                            color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade500 : Colors.white,
                             size: 22,
                           ),
                           const SizedBox(
@@ -102,7 +111,7 @@ class _ProfileCardState extends State<ProfileCard> {
                             widget.user.country,
                             style: TextStyle(
                               fontSize: 15.0,
-                              color: Colors.blue.shade800,
+                              color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade800 : Colors.white,
                             ),
                           )
                         ],
@@ -113,7 +122,7 @@ class _ProfileCardState extends State<ProfileCard> {
                         children: [
                           Icon(
                             Icons.domain,
-                            color: Colors.blue.shade500,
+                            color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade500 : Colors.white,
                             size: 22,
                           ),
                           const SizedBox(
@@ -123,7 +132,7 @@ class _ProfileCardState extends State<ProfileCard> {
                             widget.user.city,
                             style: TextStyle(
                               fontSize: 15.0,
-                              color: Colors.blue.shade800,
+                              color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade800 : Colors.white,
                             ),
                           )
                         ],

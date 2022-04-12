@@ -61,7 +61,10 @@ class _UserFormState extends State<UserForm> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue.shade300, Colors.blue.shade800]
+            colors: [
+              Theme.of(context).brightness == Brightness.light ? Colors.blue.shade300 : Colors.grey, 
+              Theme.of(context).brightness == Brightness.light ? Colors.blue.shade800 : Colors.grey.shade900, 
+            ]
           )
         ),
         child: SingleChildScrollView(
@@ -94,7 +97,7 @@ class _UserFormState extends State<UserForm> {
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue.shade300,
+                        color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade300 : Colors.grey.shade500,
                         shadows: const [
                           Shadow(
                             color: Colors.black45,
@@ -369,20 +372,19 @@ class _UserFormState extends State<UserForm> {
                     ],
                     borderRadius: BorderRadius.circular(100),
                     gradient: LinearGradient(colors: [
-                      Colors.blue.shade200,
-                      Colors.blue.shade900
+                      Theme.of(context).brightness == Brightness.light ? Colors.blue.shade200 : Colors.grey.shade300,
+                      Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Colors.black,
                     ])
                   ),
                   child: Text('Edit',
                     style: TextStyle(
-                      color: Colors.white.withOpacity(.8),
+                      color: Theme.of(context).brightness == Brightness.light ? Colors.white.withOpacity(.8) : Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.bold
                     )
                   ),
                 ),
               ),
-              
               
               const SizedBox(
                 height: 20,
