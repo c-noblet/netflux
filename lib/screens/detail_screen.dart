@@ -5,6 +5,8 @@ import 'package:netflux/models/show_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
+import '../services/theme_builder.dart';
+
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
 
@@ -39,9 +41,21 @@ class _DetailScreenState extends State<DetailScreen> {
           List<Widget> genres = [];
           for (var genre in show.genres) {
             genres.add(
-              Padding(
-                padding: EdgeInsets.all(5.0),
-                child: Text(genre),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),
+                  color: Theme.of(context).brightness == Brightness.light ? Colors.white : Colors.grey.shade600
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    genre,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade800 : Colors.white
+                    ),
+                  ),
+                ),
               )
             );
           }
@@ -49,53 +63,108 @@ class _DetailScreenState extends State<DetailScreen> {
           return Scaffold(
             appBar: AppBar(
               title: Text(show.name),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    ThemeBuilder.of(context)?.changeTheme();
+                  },
+                  icon: const Icon(Icons.dark_mode)
+                )
+              ]
             ),
-            body: SafeArea(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Image.network(show.image!.medium),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5.0),
-                              child: Text(
-                                show.name,
+            body: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Theme.of(context).brightness == Brightness.light ? Colors.blue.shade800 : Colors.black, 
+                    Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100 : Colors.grey
+                  ]
+                )
+              ),
+              child: SafeArea(
+                minimum: const EdgeInsets.all(5),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Image.network(show.image!.medium),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5.0),
+                                child: Text(
+                                  show.name,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white
+                                  )
+                                ),
+                              ),
+                              Text(
+                                show.language,
                                 style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
+                                  color: Colors.white
                                 )
                               ),
-                            ),
-                            Text(show.language),
-                            Text(DateFormat("dd/MM/yyyy").format(show.premiered)),
-                            Text(show.status),
-                            Text(show.averageRuntime.toString() + 'min')
-                          ],
+                              Text(
+                                DateFormat("dd/MM/yyyy").format(show.premiered),
+                                style: const TextStyle(
+                                  color: Colors.white
+                                )
+                              ),
+                              Text(
+                                show.status,
+                                style: const TextStyle(
+                                  color: Colors.white
+                                )
+                              ),
+                              Text(
+                                show.averageRuntime.toString() + 'min',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                )
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: genres
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: genres
+                        const SizedBox(
+                          height: 30,
                         ),
-                      ),
-                      Html(data: show.summary.toString())
-                    ],
-                  )
-                ],
-              )
+                        Html(
+                          data: show.summary.toString(),
+                          style: {
+                            "html": Style(
+                              color: Colors.white
+                            )
+                          }
+                        )
+                      ],
+                    )
+                  ],
+                )
+              ),
             ),
           );
         } else {

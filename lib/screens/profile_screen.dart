@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.blue.shade300, Colors.blue.shade800]
+                colors: [
+                  Theme.of(context).brightness == Brightness.light ? Colors.blue.shade800 : Colors.black, 
+                  Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100 : Colors.grey
+                ]
               )
             ),
             child: Column(
@@ -68,10 +73,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           );
         } else if (snapshot.hasError) {
-          return const Text('Internal error');
+          return const Center(child: Text('Internal error'));
         }
 
-        return const CircularProgressIndicator();
+        return const Center(child: CircularProgressIndicator());
       }
     );
   }

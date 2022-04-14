@@ -56,7 +56,10 @@ class _LoginFormState extends State<LoginForm> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue.shade300, Colors.blue.shade800]
+            colors: [
+              Theme.of(context).brightness == Brightness.light ? Colors.blue.shade300 : Colors.grey, 
+              Theme.of(context).brightness == Brightness.light ? Colors.blue.shade800 : Colors.grey.shade900, 
+            ]
           )
         ),
         child: SingleChildScrollView(
@@ -86,7 +89,7 @@ class _LoginFormState extends State<LoginForm> {
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue.shade300,
+                      color: Theme.of(context).brightness == Brightness.light ? Colors.blue.shade300 : Colors.grey.shade500,
                       shadows: const [
                         Shadow(
                           color: Colors.black45,
@@ -200,8 +203,8 @@ class _LoginFormState extends State<LoginForm> {
                     ],
                     borderRadius: BorderRadius.circular(100),
                     gradient: LinearGradient(colors: [
-                      Colors.blue.shade200,
-                      Colors.blue.shade900
+                      Theme.of(context).brightness == Brightness.light ? Colors.blue.shade200 : Colors.grey.shade300,
+                      Theme.of(context).brightness == Brightness.light ? Colors.blue.shade900 : Colors.black,
                     ])
                   ),
                   child: Text('Login',

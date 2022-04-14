@@ -24,7 +24,7 @@ class _ShowCardState extends State<ShowCard> {
     for (var genre in show.genres) {
       genres.add(
         Padding(
-          padding: EdgeInsets.all(3.0),
+          padding: const EdgeInsets.all(3.0),
           child: Text(genre),
         )
       );
@@ -42,7 +42,7 @@ class _ShowCardState extends State<ShowCard> {
             children: [
               (show.image != null) ? Image.network(show.image!.medium) : Container(),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 5.0),
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
                 child: Text(
                   show.name,
                   style: const TextStyle(
@@ -51,6 +51,7 @@ class _ShowCardState extends State<ShowCard> {
                   )
                 ),
               ),
+              const SizedBox(height: 10),
               Text(DateFormat("dd/MM/yyyy").format(show.premiered)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

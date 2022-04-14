@@ -50,19 +50,24 @@ class _HomeScreenState extends State<HomeScreen> {
       future: shows,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return SizedBox(
-            height: 415,
-            child: PageView.builder(
-              itemCount: 10,
-              onPageChanged: (int i) => setState(() => index = i),
-              controller: PageController(viewportFraction: 0.7),
-              itemBuilder: (_, i) {
-                return Transform.scale(
-                  scale: i == index ? 1 : 0.9,
-                  child: ShowCard(data: snapshot.data![i])
-                );
-              }
-            ),
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 415,
+                child: PageView.builder(
+                  itemCount: 10,
+                  onPageChanged: (int i) => setState(() => index = i),
+                  controller: PageController(viewportFraction: 0.7),
+                  itemBuilder: (_, i) {
+                    return Transform.scale(
+                      scale: i == index ? 1 : 0.9,
+                      child: ShowCard(data: snapshot.data![i])
+                    );
+                  }
+                ),
+              ),
+            ],
           );
         } else {
           return const Center(child: CircularProgressIndicator());

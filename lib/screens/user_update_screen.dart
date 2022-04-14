@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:netflux/components/forms/user_form.dart';
 
 import '../models/user_model.dart';
+import '../services/theme_builder.dart';
 
 
 class UserUpdateScreen extends StatelessWidget {
@@ -19,6 +20,17 @@ class UserUpdateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Netflux'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ThemeBuilder.of(context)?.changeTheme();
+            },
+            icon: const Icon(Icons.dark_mode)
+          ),
+        ],
+      ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: getUserDatas(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {

@@ -62,7 +62,19 @@ class _AppScreenState extends State<AppScreen> {
           )
         ],
       ),
-      body: list[index],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Theme.of(context).brightness == Brightness.light ? Colors.blue.shade800 : Colors.black, 
+              Theme.of(context).brightness == Brightness.light ? Colors.blue.shade100 : Colors.grey
+            ]
+          )
+        ),
+        child: list[index]
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         onTap: (int i) {
