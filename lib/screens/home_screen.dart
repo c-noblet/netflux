@@ -28,8 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<List<Show>> fetchShow() async {
-    final response =
-        await http.get(Uri.parse('https://api.tvmaze.com/shows'));
+    final response = await http.get(Uri.parse('https://api.tvmaze.com/shows'));
 
     if (response.statusCode == 200) {
       final parsed = json.decode(response.body).cast<Map<String, dynamic>>();

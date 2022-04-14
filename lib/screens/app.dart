@@ -45,7 +45,7 @@ class _AppScreenState extends State<AppScreen> {
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed('/search');
+              Navigator.of(context).pushNamed('/search');
             },
           ),
           IconButton(
