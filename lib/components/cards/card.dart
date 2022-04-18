@@ -4,22 +4,24 @@ import 'package:netflux/models/show_model.dart';
 import 'package:intl/intl.dart';
 
 class ShowCard extends StatefulWidget {
-  const ShowCard({Key? key, required this.data}) : super(key: key);
+  const ShowCard({Key? key, required this.data, this.search = ''}) : super(key: key);
 
-  final Show data;
+  final data;
+  final String search;
   
   @override
-  State<ShowCard> createState() => _ShowCardState(data: this.data);
+  State<ShowCard> createState() => _ShowCardState(data: this.data, search: this.search);
 }
 
 class _ShowCardState extends State<ShowCard> {
-  _ShowCardState({Key? key, required this.data});
+  _ShowCardState({Key? key, required this.data, this.search = ''});
 
-  final Show data;
+  final data;
+  final String search;
 
   @override
   Widget build(BuildContext context) {
-    var show = this.data;
+    var show = this.search == '' ? this.data : this.data.show;
     List<Widget> genres = [];
     for (var genre in show.genres) {
       genres.add(
@@ -32,7 +34,7 @@ class _ShowCardState extends State<ShowCard> {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/detail', arguments: this.data.id);
+        Navigator.of(context).pushNamed('/detail', arguments: show.id);
       },
       child: Card(
         child: Padding(

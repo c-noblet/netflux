@@ -23,7 +23,7 @@ class Show {
     required this.genres,
     required this.status,
     this.runtime,
-    required this.averageRuntime,
+    this.averageRuntime,
     required this.premiered,
     this.ended,
     this.officialSite,
@@ -46,7 +46,7 @@ class Show {
   List<String> genres;
   String status;
   int? runtime;
-  int averageRuntime;
+  int? averageRuntime;
   DateTime premiered;
   DateTime? ended;
   String? officialSite;
@@ -65,12 +65,12 @@ class Show {
     url: json["url"],
     name: json["name"],
     type: json["type"],
-    language: json["language"],
+    language: json["language"] ?? 'undefined',
     genres: json["genres"] != null ? List<String>.from(json["genres"].map((x) => x)) : [],
-    status: json["status"],
+    status: json["status"] ?? 'undefined',
     runtime: json["runtime"],
     averageRuntime: json["averageRuntime"],
-    premiered: DateTime.parse(json["premiered"]),
+    premiered: json["premiered"] != null ? DateTime.parse(json["premiered"]) : DateTime.parse('1900-01-01'),
     ended: json["ended"] != null ? DateTime.parse(json["ended"]) : null,
     officialSite: json["officialSite"],
     rating: json["rating"] != null ? Rating.fromMap(json["rating"]) : null,

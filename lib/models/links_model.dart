@@ -11,7 +11,7 @@ class Links {
 
   factory Links.fromMap(Map<String, dynamic> json) => Links(
     self: Previousepisode.fromMap(json["self"]),
-    previousepisode: Previousepisode.fromMap(json["previousepisode"]),
+    previousepisode: json["previousepisode"] != null ? Previousepisode.fromMap(json["previousepisode"]) : null,
   );
 
   Map<String, dynamic> toMap() => {
