@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 415,
+                height: 422,
                 child: PageView.builder(
                   itemCount: 10,
                   onPageChanged: (int i) => setState(() => index = i),
