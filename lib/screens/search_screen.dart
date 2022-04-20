@@ -130,7 +130,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData && !searchProcessing) {
                     return SizedBox(
-                      height: 415,
+                      height: 422,
                       child: PageView.builder(
                         itemCount: snapshot.data!.length > 10 ? 10 : snapshot.data!.length,
                         onPageChanged: (int i) => setState(() => index = i),
