@@ -42,7 +42,7 @@ class _ShowCardState extends State<ShowCard> {
           child: Center(
             child: Column(
             children: [
-              (show.image != null) ? Image.network(show.image!.medium) : Container(),
+              (show.image != null) ? Image.network(show.image!.medium) : Container(height: 295, color: Colors.grey,),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5.0),
                 child: Text(
