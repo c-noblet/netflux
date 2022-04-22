@@ -27,7 +27,7 @@ class _ShowCardState extends State<ShowCard> {
       genres.add(
         Padding(
           padding: const EdgeInsets.all(3.0),
-          child: Text(genre),
+          child: (genre == 'Science-Fiction') ? const Text('Sci-Fi') : Text(genre),
         )
       );
     }
