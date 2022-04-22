@@ -91,7 +91,8 @@ class _DetailScreenState extends State<DetailScreen> {
                       children: [
                         Expanded(
                           flex: 1,
-                          child: Image.network(show.image!.medium),
+                          child: (show.image != null) ? Image.network(show.image!.medium) : Container(height: 295, color: Colors.grey)
+                          
                         ),
                         Expanded(
                           flex: 1,
